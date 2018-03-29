@@ -4,8 +4,8 @@ import org.lwjgl.opengl.Display;
 
 import RenderEngine.DisplayManager;
 import RenderEngine.Loader;
-import RenderEngine.RawModel;
 import RenderEngine.Renderer;
+import models.RawModel;
 import shaders.StaticShader;
 
 public class MainGameLoop {
