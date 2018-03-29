@@ -16,19 +16,19 @@ public class MainGameLoop {
 		Loader loader= new Loader();
 		Renderer renderer= new Renderer();
 		
-		//OpenGL expects vertices to be defined counter clockwise by default
-		 float[] vertices = {
-			    //First Triangle
-				-0.5f, 0.5f, 0f,
-			    -0.5f, -0.5f, 0f,
-			    0.5f, -0.5f, 0f,
-			    //Second triangle
-			    0.5f, -0.5f, 0f,
-			    0.5f, 0.5f, 0f,
-			    -0.5f, 0.5f, 0f
+		float[] vertices = {
+				-0.5f, 0.7f, 0f,	//v0
+			    -0.5f, -0.5f, 0f,	//v1
+			    0.5f, -0.5f, 0f,	//v2
+			    0.5f, 0.5f, 0f		//v3
 			  };
+		
+		int[] indices = {
+				0,1,3,
+				3,1,2
+		};
 
-		RawModel model= loader.loadtoVAO(vertices);
+		RawModel model= loader.loadtoVAO(vertices, indices);
 		
 		while(!Display.isCloseRequested()) {
 			renderer.prepare();
