@@ -25,9 +25,9 @@ public class MainGameLoop {
 		Renderer renderer= new Renderer(shader);
 		
 		
-		RawModel model= OBJLoader.loadObjModel("Cyborg", loader);
+		RawModel model= OBJLoader.loadObjModel("dragon", loader);
 		
-		TexturedModel texturedModel=new TexturedModel(model,new ModelTexture(loader.loadTexture("Image")));
+		TexturedModel texturedModel=new TexturedModel(model,new ModelTexture(loader.loadTexture("Yellow")));
 		ModelTexture texture= texturedModel.getTexture();
 		texture.setReflectivity(1);
 		texture.setShineDamper(10);
