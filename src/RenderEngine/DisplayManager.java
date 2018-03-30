@@ -29,6 +29,14 @@ public class DisplayManager {
 		GL11.glViewport(0, 0, WIDTH, HEIGHT);
 	}	
 	
+	public static int getWidth() {
+		return WIDTH;
+	}
+
+	public static int getHeight() {
+		return HEIGHT;
+	}
+
 	public static void updateDisplay() {
 		
 		Display.sync(FPS_CAP);
