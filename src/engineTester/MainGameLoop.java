@@ -9,6 +9,7 @@ import RenderEngine.OBJLoader;
 import RenderEngine.Renderer;
 import entities.Camera;
 import entities.Entity;
+import entities.Light;
 import models.RawModel;
 import models.TexturedModel;
 import shaders.StaticShader;
@@ -25,9 +26,13 @@ public class MainGameLoop {
 		
 		
 		RawModel model= OBJLoader.loadObjModel("Cyborg", loader);
-		ModelTexture texture=new ModelTexture(loader.loadTexture("Yellow"));
+		
+		ModelTexture texture=new ModelTexture(loader.loadTexture("White"));
 		TexturedModel texturedModel=new TexturedModel(model,texture);
+		
 		Entity entity =new Entity(texturedModel, new Vector3f(0,-5,-10),0,0,0,1);
+		Light light = new Light(new Vector3f(0,0,0),new Vector3f(1,1,1));
+		
 		Camera camera= new Camera();
 		
 		while(!Display.isCloseRequested()) {
@@ -36,6 +41,7 @@ public class MainGameLoop {
 			camera.move();
 			renderer.prepare();
 			shader.start();
+			shader.loadLight(light);
 			shader.loadViewMatrix(camera);
 			//game logic
 			renderer.render(entity, shader);
