@@ -25,9 +25,9 @@ public class MainGameLoop {
 		
 		
 		RawModel model= OBJLoader.loadObjModel("Cyborg", loader);
-		ModelTexture texture=new ModelTexture(loader.loadTexture("Image"));
+		ModelTexture texture=new ModelTexture(loader.loadTexture("Yellow"));
 		TexturedModel texturedModel=new TexturedModel(model,texture);
-		Entity entity =new Entity(texturedModel, new Vector3f(0,-5,-1),0,0,0,1);
+		Entity entity =new Entity(texturedModel, new Vector3f(0,-5,-10),0,0,0,1);
 		Camera camera= new Camera();
 		
 		while(!Display.isCloseRequested()) {
