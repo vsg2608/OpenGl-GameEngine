@@ -46,14 +46,14 @@ public class Terrain {
 		int vertexPointer = 0;
 		for(int i=0;i<VERTEX_COUNT;i++){
 			for(int j=0;j<VERTEX_COUNT;j++){
-				vertices[vertexPointer*3] = (float)j/((float)VERTEX_COUNT - 1) * SIZE;
+				vertices[vertexPointer*3] = -(float)j/((float)VERTEX_COUNT - 1) * SIZE;
 				vertices[vertexPointer*3+1] = 0;
-				vertices[vertexPointer*3+2] = (float)i/((float)VERTEX_COUNT - 1) * SIZE;
+				vertices[vertexPointer*3+2] = -(float)i/((float)VERTEX_COUNT - 1) * SIZE;
 				normals[vertexPointer*3] = 0;
 				normals[vertexPointer*3+1] = 1;
 				normals[vertexPointer*3+2] = 0;
-				textureCoords[vertexPointer*2] = (float)j/((float)VERTEX_COUNT - 1);
-				textureCoords[vertexPointer*2+1] = (float)i/((float)VERTEX_COUNT - 1);
+				textureCoords[vertexPointer*2] = -(float)j/((float)VERTEX_COUNT - 1);
+				textureCoords[vertexPointer*2+1] = -(float)i/((float)VERTEX_COUNT - 1);
 				vertexPointer++;
 			}
 		}
@@ -74,4 +74,5 @@ public class Terrain {
 		}
 		return loader.loadtoVAO(vertices, textureCoords, normals, indices);
 	}
+
 }
