@@ -35,10 +35,10 @@ public class MainGameLoop {
 		texture.setReflectivity(1);
 		texture.setShineDamper(10);
 		Entity entity =new Entity(texturedModel, new Vector3f(10,-5,-30),0,0,0,1);
-		Entity entityCopy = new Entity(texturedModelWhite, new Vector3f(-10,-5,-30),0,0,0,1);
+		Entity entityCopy = new Entity(texturedModel, new Vector3f(-10,-5,-30),0,180,0,1);
 		Light light = new Light(new Vector3f(3000,2000,2000),new Vector3f(1,1,1));
 		
-		Terrain terrain = new Terrain(0,0,loader,new ModelTexture(loader.loadTexture("White")));
+		Terrain terrain = new Terrain(10,10,loader,new ModelTexture(loader.loadTexture("White")));
 		
 		Camera camera= new Camera();
 		
@@ -47,7 +47,7 @@ public class MainGameLoop {
 		while(!Display.isCloseRequested()) {
 			entity.increasePosition(0, 0, 0);
 			entity.increaseRotation(0, 1, 0);
-			entityCopy.increaseRotation(0, 1, 0);
+			entityCopy.increaseRotation(0, -1, 0);
 			camera.move();
 			
 			renderer.processTerrain(terrain);
