@@ -5,6 +5,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import RenderEngine.DisplayManager;
 import models.TexturedModel;
+import terrain.Terrain;
 
 public class Player extends Entity{
 
@@ -24,20 +25,24 @@ public class Player extends Entity{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void move() {
+	public void move(Terrain terrain) {
 		checkInputs();
 		super.increaseRotation(0, currentTurnSpeed * DisplayManager.getFrameTime(), 0);
 		float distance = currentSpeed * DisplayManager.getFrameTime();
-		upwardSpeed += GRAVITY * DisplayManager.getFrameTime();
+		
+		float terrainHeight= terrain.getHeightOfTerrain(super.getPosition().x, super.getPosition().z);
+		if(super.getPosition().y<terrainHeight) {
+			upwardSpeed=0;
+			super.getPosition().y=terrainHeight;
+		}else {
+			upwardSpeed += GRAVITY * DisplayManager.getFrameTime();
+		}
 		float dx = (float) (distance * Math.sin(Math.toRadians(super.getRotY())));
 		float dy = upwardSpeed * DisplayManager.getFrameTime();
 		float dz = (float) (distance * Math.cos(Math.toRadians(super.getRotY())));
 		super.increasePosition(	dx, dy, dz);
-		if(super.getPosition().y<TERRAIN_HEIGHT) {
-			upwardSpeed=0;
-			super.getPosition().y=0;
-			
-		}
+		
+		
 	}
 	
 	private void jump() {
@@ -62,7 +67,7 @@ public class Player extends Entity{
 			this.currentTurnSpeed = 0;
 		}
 		
-		if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)&& super.getPosition().y==TERRAIN_HEIGHT) {
+		if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
 			jump();
 		}
 	}
