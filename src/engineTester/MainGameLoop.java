@@ -16,6 +16,7 @@ import RenderEngine.EntityRenderer;
 import entities.Camera;
 import entities.Entity;
 import entities.Light;
+import entities.Player;
 import models.RawModel;
 import models.TexturedModel;
 import shaders.StaticShader;
@@ -31,9 +32,14 @@ public class MainGameLoop {
 		
 		
 		RawModel model = OBJLoader.loadObjModel("tree", loader);
-		
 		TexturedModel staticModel = new TexturedModel(model,new ModelTexture(loader.loadTexture("tree")));
 		
+		RawModel Cyrborgmodel = OBJLoader.loadObjModel("Cyborg", loader);
+		TexturedModel CyborgModel = new TexturedModel(Cyrborgmodel,new ModelTexture(loader.loadTexture("White")));
+		
+		Player player = new Player(CyborgModel, new Vector3f(0,0,-10),0,0,0,0.5f);
+		player.increaseRotation(0, 180, 0);
+
 		List<Entity> entities = new ArrayList<Entity>();
 		Random random = new Random();
 		for(int i=0;i<500;i++){
@@ -41,17 +47,17 @@ public class MainGameLoop {
 		}
 		
 		Light light = new Light(new Vector3f(20000,20000,2000),new Vector3f(1,1,1));
+		Terrain terrain = new Terrain(0,0,loader,new ModelTexture(loader.loadTexture("grass")), "heightmap");
 		
-		Terrain terrain = new Terrain(0,0,loader,new ModelTexture(loader.loadTexture("grass")));
-		//Terrain terrain2 = new Terrain(2,0,loader,new ModelTexture(loader.loadTexture("grass")));
-		
-		Camera camera = new Camera();	
+		Camera camera = new Camera(player);	
 		MasterRenderer renderer = new MasterRenderer();
+		
 		
 		while(!Display.isCloseRequested()){
 			camera.move();
+			player.move();
+			renderer.processEntity(player);
 			renderer.processTerrain(terrain);
-			//renderer.processTerrain(terrain2);
 			for(Entity entity:entities){
 				renderer.processEntity(entity);
 			}
